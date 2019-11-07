@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: green;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+  text-align: center;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+#rr-element {
+    white-space: nowrap;
+}
+
+#rr-element label {
+   padding-left: 0.4em;
+}
+
+p.marked1{
+  position: relative;
+  font-family: sans-serif;
+  font-size: 2em;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 0, 0, 0.6);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="http://127.0.0.1:8000/restaurant/getallrestaurants/">All Restaurant</a>
+  <button class="dropdown-btn">Contact
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="https://github.com/apurvchaudhary" target="_blank">Github</a>
+    <a href="https://www.linkedin.com/in/apurv-chaudhary-9b0b7372/" target="_blank">linkedin</a>
+    <a href="https://www.facebook.com/apurvchaudhary11293" target="_blank">facebook</a>
+  </div>
+  <button class="dropdown-btn">Cost for two
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyprice/?price=1000">below 1000</a>
+    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyprice/?price=2000">1000-2000</a>
+    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyprice/?price=3000">above 2000</a>
+  </div>
+    <button class="dropdown-btn">Votes filter
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyvotes/?votes=100">below 100</a>
+    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyvotes/?votes=200">100-500</a>
+    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyvotes/?votes=500">above 500</a>
+  </div>
+     <button class="dropdown-btn">Cuisines filter
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+      <div>
+          <form method='post' action='{% url "get_restaurant_by_cuisine" %}'>{% csrf_token %}
+   <table>
+      <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='French' /> <span style="color:#33cccc">French</span>
+         </td>
+      </tr>
+
+      <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='Indian' /><span style="color:#33cccc">Indian</span>
+         </td>
+      </tr>
+
+      <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='Japanese' /><span style="color:#33cccc">Japanese</span>
+         </td>
+      </tr>
+       <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='Desserts' /><span style="color:#33cccc">Desserts</span>
+         </td>
+      </tr>
+       <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='Filipino' /><span style="color:#33cccc">Filipino</span>
+         </td>
+      </tr>
+       <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='Seafood' /><span style="color:#33cccc">Seafood</span>
+         </td>
+      </tr>
+       <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='Sushi' /><span style="color:#33cccc">Sushi</span>
+         </td>
+      </tr>
+       <tr>
+         <td>
+            <input type='checkbox' name='cuisine' value='Korean' /><span style="color:#33cccc">Korean</span>
+         </td>
+      </tr>
+    <tr>
+         <td>
+            <input type='submit' value='Submit Cuisine filter' />
+         </td>
+      </tr>
+   </table>
+</form>
+      </div>
+  </div>
+    <div style="padding-left:15px;">
+  <form method='get' action='{% url "get_restaurant_by_name" %}'>{% csrf_token %}
+      <table>
+          <tr>
+         <td>
+           <span style="color:#33cccc">Restaurant name</span><input type='text' name='name' value='' />
+         </td>
+      </tr>
+          <tr>
+         <td>
+            <input type='submit' value='search'/>
+         </td>
+      </tr>
+      </table>
+  </form>
+        </div>
+</div>
+<div class="main">
+  <h2 style="background-color:powderblue;">Restaurant details on your fingure tip by @purv chaudhary</h2>
+    <marquee style="color:#ff0066; background-color:powderblue">For any detailed discussion kindly reach out to me on my email id or contact number mentioned in marquee: apurv.sirohi@gmail.com, +91-8553743806</marquee>
+  {% if error %}
+      <p class="marked1">
+          {{error}}
+      </p>
+    {% endif %}
+    <ol>
+      {% for i in data%}
+      <li><h3 style="color:#33cccc">{{i.name}}</h3></li>
+      <ul>
+          <li>Table booking allowed : <span style="color:#33cccc">{{i.table_booking}}</span></li>
+          <li>Cuisine Available : <span style="color:#33cccc">{{i.cuisine}}</span></li>
+          <li>Online delivery available :  <span style="color:#33cccc">{{i.online_delivery}}</span></li>
+          <li>Cost for two people :  <span style="color:#33cccc">{{i.cost_for_two}} {{i.currency}}</span></li>
+          <li>Rating Status :  <span style="color:#33cccc">{{i.rating}}/5</span></li>
+          {% if i.rating_text == 'Excellent'%}
+          <li>Rating Status :  <span style="color:#009933">{{i.rating_text}}</span></li>
+          {% elif i.rating_text == 'Very Good'%}
+          <li>Rating Status :  <span style="color:#66ff99">{{i.rating_text}}</span></li>
+          {% elif i.rating_text == 'Good'%}
+          <li>Rating Status :  <span style="color:#ffcc00">{{i.rating_text}}</span></li>
+          {% elif i.rating_text == 'Average'%}
+          <li>Rating Status :  <span style="color:#ff6600">{{i.rating_text}}</span></li>
+          {% else %}
+          <li>Rating : {{i.rating_text}}</li>
+          {% endif %}
+          <li>Public Votes :  <span style="color:#33cccc">{{i.votes}}</span></li>
+          <li>Address :  <span style="color:#33cccc">{{i.location.0.address}}</span></li><br>
+        {% block content %}
+          <iframe width="400"
+          height="300"
+          frameborder="0"
+          style="border:0"
+          src="https://www.google.com/maps/embed/v1/view?center={{ i.location.0.latitude }},{{ i.location.0.longitude }}&zoom=8&key={{ 'AIzaSyDAf-mVrHDo61AD7pfok0lwMWEp7RCkaaQ' }}"
+          allowfullscreen></iframe>
+          {% endblock %}
+          <hr>
+      </ul>
+      {% endfor %}
+  </ol>
+
+    <p>All rights reserved with apurv chaudhary © 2019, my <a href="https://github.com/apurvchaudhary">github, </a><a href="https://www.linkedin.com/in/apurv-chaudhary-9b0b7372/">linkedin</a></p>
+</div>
+
+<script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>
+
+</body>
+</html>
