@@ -5,6 +5,7 @@ step 1
 first clone repo with command : git clone https://github.com/apurvchaudhary/restaurants.git
 
 step 2
+# Note: I created this project on python 3.7, earlier version would not support some of functionality.
 creating virtual environment, install virtualenv if not installed for installation google it
 for creating python3 virtualenv : python3 -m venv env_name
 
