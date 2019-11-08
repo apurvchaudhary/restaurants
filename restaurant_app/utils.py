@@ -65,11 +65,11 @@ def get_restaurant_by_cuisine(request, cuisine):
 
 def get_restaurant_by_name(request, name):
     if not name:
-        return render(request=request, template_name='home.html', context={'error': 'No result for empty restaurant name...!'})
+        return render(request=request, template_name='home.html', context={'error': 'Sorry! No result for empty restaurant name'})
     restaurants = models.Restaurant.objects.filter(name__contains=name).\
         prefetch_related('restaurant_cuisine', 'restaurant_location')
     if not restaurants:
-        return render(request=request, template_name='home.html', context={'error': 'We did not find any restaurant with this name...!'})
+        return render(request=request, template_name='home.html', context={'error': 'Sorry! We did not find any restaurant with this name'})
     serializer = serializers.GetRestaurantSerializer(restaurants, many=True)
     return render(request=request, template_name='home.html', context={'data': serializer.data})
 

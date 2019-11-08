@@ -108,7 +108,7 @@ p.marked1{
 <body>
 
 <div class="sidenav">
-  <a href="http://127.0.0.1:8000/restaurant/getallrestaurants/">All Restaurant</a>
+  <a href="{% url 'all_restaurants' %}">All Restaurant</a>
   <button class="dropdown-btn">Contact
     <i class="fa fa-caret-down"></i>
   </button>
@@ -121,17 +121,17 @@ p.marked1{
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyprice/?price=1000">below 1000</a>
-    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyprice/?price=2000">1000-2000</a>
-    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyprice/?price=3000">above 2000</a>
+    <a href="{% url 'get_restaurant_by_price' %}?price=1000">below 1000</a>
+    <a href="{% url 'get_restaurant_by_price' %}?price=2000">1000-2000</a>
+    <a href="{% url 'get_restaurant_by_price' %}?price=3000">above 2000</a>
   </div>
     <button class="dropdown-btn">Votes filter
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyvotes/?votes=100">below 100</a>
-    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyvotes/?votes=200">100-500</a>
-    <a href="http://127.0.0.1:8000/restaurant/getrestaurantbyvotes/?votes=500">above 500</a>
+    <a href="{% url 'get_restaurant_by_votes' %}?votes=100">below 100</a>
+    <a href="{% url 'get_restaurant_by_votes' %}?votes=200">100-500</a>
+    <a href="{% url 'get_restaurant_by_votes' %}?votes=500">above 500</a>
   </div>
      <button class="dropdown-btn">Cuisines filter
     <i class="fa fa-caret-down"></i>
@@ -220,9 +220,17 @@ p.marked1{
       {% for i in data%}
       <li><h3 style="color:#33cccc">{{i.name}}</h3></li>
       <ul>
-          <li>Table booking allowed : <span style="color:#33cccc">{{i.table_booking}}</span></li>
+          {% if i.table_booking %}
+          <li>Table booking allowed : <span style="color:green">Yes of course!!</span></li>
+          {% else %}
+          <li>Table booking allowed : <span style="color:red">Sorry!!</span></li>
+          {% endif %}
           <li>Cuisine Available : <span style="color:#33cccc">{{i.cuisine}}</span></li>
-          <li>Online delivery available :  <span style="color:#33cccc">{{i.online_delivery}}</span></li>
+          {% if i.online_delivery %}
+          <li>Online delivery available :  <span style="color:green">Yes of course!!</span></li>
+          {% else %}
+          <li>Online delivery available :  <span style="color:red">Sorry!!</span></li>
+          {% endif %}
           <li>Cost for two people :  <span style="color:#33cccc">{{i.cost_for_two}} {{i.currency}}</span></li>
           <li>Rating Status :  <span style="color:#33cccc">{{i.rating}}/5</span></li>
           {% if i.rating_text == 'Excellent'%}
