@@ -53,3 +53,19 @@ class Location(ModelBase):
 
     def __str__(self):
         return f"restaurant id : {self.restaurant_field} and city : {self.city}"
+
+
+class DataFile(ModelBase):
+    """
+    Model to save file then extract data from them by admin only
+    """
+    restaurant_details = models.FileField()
+    restaurant_address = models.FileField()
+
+    def save(self, *args, **kwargs):
+        from .utils import upload_restaurant, upload_restaurant_locations
+        super(DataFile, self).save(*args, **kwargs)
+        restaurant_filename = self.restaurant_details.url
+        restaurant_address_filename = self.restaurant_address.url
+        upload_restaurant(restaurant_filename)
+        upload_restaurant_locations(restaurant_address_filename)

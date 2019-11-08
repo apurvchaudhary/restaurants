@@ -2,22 +2,6 @@ from rest_framework.views import APIView
 from . import utils
 
 
-class UploadData(APIView):
-    """
-    API to upload data with script
-    """
-    def get(self, request):
-        return utils.upload_restaurant()
-
-
-class UploadLocations(APIView):
-    """
-    API to upload location data with script
-    """
-    def get(self, request):
-        return utils.upload_restaurant_locations()
-
-
 class GetAllRestaurant(APIView):
     """
     API to get list of all restaurant

@@ -74,11 +74,11 @@ def get_restaurant_by_name(request, name):
     return render(request=request, template_name='home.html', context={'data': serializer.data})
 
 
-def upload_restaurant():
+def upload_restaurant(filename):
     """
     utility to upload sheet data to restaurant table
     """
-    df = pd.read_csv('/Users/apurvchaudhary/Desktop/restaurant_folder/restaurant/restaurantsa9126b3.csv')
+    df = pd.read_csv(filename)
     restaurant_id = df['Restaurant ID']
     name = df['Restaurant Name']
     cost_for_two = df['Average Cost for two']
@@ -90,6 +90,11 @@ def upload_restaurant():
     rating_text = df['Rating text']
     votes = df['Votes']
     for i in range(len(df)):
+        try:
+            models.Restaurant.objects.get(restaurant_id=restaurant_id[i])
+            continue
+        except ObjectDoesNotExist:
+            pass
         if table_booking_[i] == 'Yes':
             table_booking = True
         else:
@@ -108,13 +113,13 @@ def upload_restaurant():
                 cuisine.save()
         except Exception as e:
             print('exception occured while creating restaurant object : ' + str(e))
-    return response(data='Data uploaded Successfully')
 
-def upload_restaurant_locations():
+
+def upload_restaurant_locations(filename):
     """
     utility to upload sheet data to restaurant address table
     """
-    df = pd.read_csv('/Users/apurvchaudhary/Desktop/restaurant_folder/restaurant/restaurant_addc9a1430.csv')
+    df = pd.read_csv(filename)
     restaurant_id = df['Restaurant ID']
     country_code = df['Country Code']
     city = df['City']
@@ -125,6 +130,11 @@ def upload_restaurant_locations():
     longitude = df['Longitude']
     for i in range(len(df)):
         try:
+            models.Location.objects.get(restaurant_field_id=restaurant_id[i])
+            continue
+        except ObjectDoesNotExist:
+            pass
+        try:
             restaurant = models.Restaurant.objects.get(restaurant_id=restaurant_id[i])
         except ObjectDoesNotExist:
             print(f'object does not exist : {restaurant_id[i]}')
@@ -133,4 +143,3 @@ def upload_restaurant_locations():
                                                      address=address[i], locality=locality[i], locality_verbose=locality_verbose[i],
                                                      latitude=latitude[i], longitude=longitude[i])
             location.save()
-    return response(data='Locations uploaded Successfully')

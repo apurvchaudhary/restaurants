@@ -5,3 +5,4 @@ from . import models
 admin.site.register(models.Restaurant)
 admin.site.register(models.Cuisine)
 admin.site.register(models.Location)
+admin.site.register(models.DataFile)
