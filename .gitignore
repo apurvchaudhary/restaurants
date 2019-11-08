@@ -1,2 +1,5 @@
-#ignore file formats
+# ignore file formats
 *.pyc
+
+# ignore folder
+.idea/
