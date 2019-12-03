@@ -232,7 +232,7 @@ p.marked1{
           <li>Online delivery available :  <span style="color:red">Sorry!!</span></li>
           {% endif %}
           <li>Cost for two people :  <span style="color:#33cccc">{{i.cost_for_two}} {{i.currency}}</span></li>
-          <li>Rating Status :  <span style="color:#33cccc">{{i.rating}}/5</span></li>
+          <li>Rating :  <span style="color:#33cccc">{{i.rating}}/5</span></li>
           {% if i.rating_text == 'Excellent'%}
           <li>Rating Status :  <span style="color:#009933">{{i.rating_text}}</span></li>
           {% elif i.rating_text == 'Very Good'%}
@@ -246,14 +246,14 @@ p.marked1{
           {% endif %}
           <li>Public Votes :  <span style="color:#33cccc">{{i.votes}}</span></li>
           <li>Address :  <span style="color:#33cccc">{{i.location.0.address}}</span></li><br>
-        {% block content %}
-          <iframe width="400"
-          height="300"
-          frameborder="0"
-          style="border:0"
-          src="https://www.google.com/maps/embed/v1/view?center={{ i.location.0.latitude }},{{ i.location.0.longitude }}&zoom=8&key={{ 'AIzaSyDAf-mVrHDo61AD7pfok0lwMWEp7RCkaaQ' }}"
-          allowfullscreen></iframe>
-          {% endblock %}
+<!--        {% block content %}-->
+<!--          <iframe width="400"-->
+<!--          height="300"-->
+<!--          frameborder="0"-->
+<!--          style="border:0"-->
+<!--          src="https://www.google.com/maps/embed/v1/view?center={{ i.location.0.latitude }},{{ i.location.0.longitude }}&zoom=8&key={{ 'AIzaSyDAf-mVrHDo61AD7pfok0lwMWEp7RCkaaQ' }}"-->
+<!--          allowfullscreen></iframe>-->
+<!--          {% endblock %}-->
           <hr>
       </ul>
       {% endfor %}
